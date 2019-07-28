@@ -24,9 +24,7 @@ print <<<HERE
 <center><INPUT class="myButton" type="submit" name="Generate" value="Do It"></center>
 </form>
 HERE;
-
-  // test change
-return 0;
+  return 0;
 } // end function definition for print form
 
 function print_bookfinder($url){
