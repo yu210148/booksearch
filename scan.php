@@ -122,6 +122,16 @@ function get_cover_image_url($bCode){
   return $pictureURL;
 }
 
+function sort_results($bfLowPrice, $ebayLowPrice, $amzLowPrice){
+  // a function to sort the results low to highest
+  $resultArray = array("BookFinder"=>$bfLowPrice, "eBay"=>$ebayLowPrice, "Amazon"=>$amzLowPrice);
+  
+  // sort the array
+  asort($resultArray);
+  
+  return $resultArray;  
+}
+
 function output_bookfinder($amzLowPrice, $ebayLowPrice, $bfLowPrice, $bCode){
 
   // get cover image url
@@ -147,28 +157,40 @@ HERE;
   
   // a function to display the output from bookfinder.command
   if (is_numeric($bfLowPrice)){
-    print "<td><a target=\"_blank\" href=https://www.bookfinder.com/search/?isbn=$bCode&st=xl&ac=qr>Lowest Price on BookFinder.com is</a></td><td><a target=\"_blank\" href=https://www.bookfinder.com/search/?isbn=$bCode&st=xl&ac=qr><div align=\"right\">$$bfLowPrice</a></div></td><td><div align=\"right\">$$halfbfLowPrice</div></td>";
+    $bookfinderOutput = "<td><a target=\"_blank\" href=https://www.bookfinder.com/search/?isbn=$bCode&st=xl&ac=qr>Lowest Price on BookFinder.com is</a></td><td><a target=\"_blank\" href=https://www.bookfinder.com/search/?isbn=$bCode&st=xl&ac=qr><div align=\"right\">$$bfLowPrice</a></div></td><td><div align=\"right\">$$halfbfLowPrice</div></td>";
   } else {
-    print "<td><a target=\"_blank\" href=https://www.bookfinder.com/search/?isbn=$bCode&st=xl&ac=qr>No result found on Bookfinder.com</a></td><td></td><td></td>";
+    $bookfinderOutput = "<td><a target=\"_blank\" href=https://www.bookfinder.com/search/?isbn=$bCode&st=xl&ac=qr>No result found on Bookfinder.com</a></td><td></td><td></td>";
   } // end else
+  
+  // just putting this here temporaraly
+  print "$bookfinderOutput";
   
   print "</tr><tr>";
   
   // and ebay result(s)
   if (is_numeric($ebayLowPrice)){
-    print "<td><a target=\"_blank\" href=https://www.ebay.com/sch/i.html?_from=R40&_nkw=$bCode&_sacat=0&_sop=15>Lowest Price on eBay.com is</a></td><td><a target=\"_blank\" href=https://www.ebay.com/sch/i.html?_from=R40&_nkw=$bCode&_sacat=0&_sop=15><div align=\"right\">$$ebayLowPrice</div></a></td><td><div align=\"right\">$$halfebayLowPrice</div></td>";
+    $ebayOutput = "<td><a target=\"_blank\" href=https://www.ebay.com/sch/i.html?_from=R40&_nkw=$bCode&_sacat=0&_sop=15>Lowest Price on eBay.com is</a></td><td><a target=\"_blank\" href=https://www.ebay.com/sch/i.html?_from=R40&_nkw=$bCode&_sacat=0&_sop=15><div align=\"right\">$$ebayLowPrice</div></a></td><td><div align=\"right\">$$halfebayLowPrice</div></td>";
   } else {
-    print "<td><a target=\"_blank\" href=https://www.ebay.com/sch/i.html?_from=R40&_nkw=$bCode&_sacat=0&_sop=15>No result found on eBay.com</a></td><td></td><td></td>";
+    $ebayOutput = "<td><a target=\"_blank\" href=https://www.ebay.com/sch/i.html?_from=R40&_nkw=$bCode&_sacat=0&_sop=15>No result found on eBay.com</a></td><td></td><td></td>";
   } // end else
+  
+  // just putting this here temporaraly
+  print "$ebayOutput";
   
   print "</tr></tr>";
   
   // and amazon result
   if (is_numeric($amzLowPrice)){
-    print "<td><a target=\"_blank\" href=https://www.amazon.com/s?k=$bCode&ref=nb_sb_noss>Lowest Price on amazon.com is</a></td><td><a target=\"_blank\" href=https://www.amazon.com/s?k=$bCode&ref=nb_sb_noss><div align=\"right\">$$amzLowPrice</div></a></td><td><div align=\"right\">$$halfamzLowPrice</div></td>";
+    $amazonOutput = "<td><a target=\"_blank\" href=https://www.amazon.com/s?k=$bCode&ref=nb_sb_noss>Lowest Price on amazon.com is</a></td><td><a target=\"_blank\" href=https://www.amazon.com/s?k=$bCode&ref=nb_sb_noss><div align=\"right\">$$amzLowPrice</div></a></td><td><div align=\"right\">$$halfamzLowPrice</div></td>";
   } else {
-    print "<td><a target=\"_blank\" href=https://www.amazon.com/s?k=$bCode&ref=nb_sb_noss>No result found on amazon.com</a></td><td></td><td></td>";
+    $amazonOutput = "<td><a target=\"_blank\" href=https://www.amazon.com/s?k=$bCode&ref=nb_sb_noss>No result found on amazon.com</a></td><td></td><td></td>";
   } // end else
+
+  // just putting this here temporaraly
+  print "$amazonOutput";
+  
+  print "</tr>";
+  
 return 0;
 }
 
